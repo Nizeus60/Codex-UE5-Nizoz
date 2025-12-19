@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pense‑Bête UE5 | Codex UE5 par Nizeus</title>
+    <meta name="description" content="Commandes, raccourcis et astuces de debug/performance UE5. Un recueil pratique, pensé pour être copié-collé en prod. Par Nizeus.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">UE</div>
+                <span class="logo-text">Codex UE5</span>
+                <span class="logo-badge">by Nizeus</span>
+            </a>
+            
+            <div class="header-actions">
+                <a href="index.html" class="nav-back">← Accueil</a>
+                <a href="index.html#contact" class="nav-back">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème" role="switch">
+                    <div class="theme-toggle-thumb">
+                        <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                        <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+                            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- LAYOUT -->
+    <div class="layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Navigation</div>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#intro" class="nav-link active">Introduction</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Raccourcis Éditeur</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#navigation" class="nav-link">Navigation & Sélection</a></li>
+                        <li class="nav-item"><a href="#gizmo" class="nav-link">Gizmo & Transform</a></li>
+                        <li class="nav-item"><a href="#play" class="nav-link">Play & Simulation</a></li>
+                        <li class="nav-item"><a href="#save" class="nav-link">Sauvegarde</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Debug & Performance</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#console" class="nav-link">Console & Logs</a></li>
+                        <li class="nav-item"><a href="#stat" class="nav-link">Commandes STAT</a></li>
+                        <li class="nav-item"><a href="#profiling" class="nav-link">Capture & Profiling</a></li>
+                        <li class="nav-item"><a href="#streaming" class="nav-link">Texture Streaming Pool</a></li>
+                        <li class="nav-item"><a href="#scalability" class="nav-link">Scalability</a></li>
+                        <li class="nav-item"><a href="#debug-visual" class="nav-link">Debug Visuel</a></li>
+                        <li class="nav-item"><a href="#memory" class="nav-link">Mémoire & Rapports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Kit de Survie</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#kit" class="nav-link">Commandes Rapides</a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-sidebar">
+                <span class="ad-label">Publicité</span>
+                <div class="ad-placeholder">300×250</div>
+            </div>
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main class="main">
+            <article class="content">
+                <h1 class="page-title">Pense-Bête UE5</h1>
+                <p class="page-subtitle">Commandes, raccourcis et astuces que j’utilise en dev UE5. Un format “recueil” : simple, fluide, et détaillé quand il faut comprendre.</p>
+                
+                <!-- INTRO -->
+                <section id="intro">
+                    <div class="callout callout--info">
+                        <div class="callout-icon">ℹ</div>
+                        <div class="callout-content">
+                            <div class="callout-title">À propos de ce guide</div>
+                            <p>Ce n’est pas une doc exhaustive. C’est un extrait de mon <strong>recueil</strong> : les commandes et réflexes que j’utilise pour débugger, profiler et optimiser sur UE5.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- RACCOURCIS NAVIGATION -->
+                <section id="navigation">
+                    <h2>Raccourcis Indispensables</h2>
+                    <h3>Navigation & Sélection</h3>
+                    
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Focus sur l'objet sélectionné</span>
+                            <div class="shortcut-keys"><kbd>F</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Game View (cache icônes/volumes/gizmos)</span>
+                            <div class="shortcut-keys"><kbd>G</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Browse to Asset (trouve dans Content Browser)</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd><kbd>B</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Ouvrir l'asset sélectionné</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd><kbd>E</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Dupliquer</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd><kbd>W</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Dupliquer en déplaçant (viewport)</span>
+                            <div class="shortcut-keys"><kbd>Alt</kbd> + glisser</div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Snap au sol (selon collisions)</span>
+                            <div class="shortcut-keys"><kbd>End</kbd></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- GIZMO -->
+                <section id="gizmo">
+                    <h3>Gizmo & Transform</h3>
+                    
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Move / Rotate / Scale</span>
+                            <div class="shortcut-keys"><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Cycle entre W/E/R</span>
+                            <div class="shortcut-keys"><kbd>Espace</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Snapping grille (pendant move)</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Vertex snapping (maintenir)</span>
+                            <div class="shortcut-keys"><kbd>V</kbd></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- PLAY -->
+                <section id="play">
+                    <h3>Play & Simulation</h3>
+                    
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Play (PIE)</span>
+                            <div class="shortcut-keys"><kbd>Alt</kbd><kbd>P</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Libérer la souris en PIE</span>
+                            <div class="shortcut-keys"><kbd>Shift</kbd><kbd>F1</kbd></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- SAVE -->
+                <section id="save">
+                    <h3>Sauvegarde</h3>
+                    
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Sauvegarder</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd><kbd>S</kbd></div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-desc">Tout sauvegarder</span>
+                            <div class="shortcut-keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>S</kbd></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- CONSOLE -->
+                <section id="console">
+                    <h2>Console & Logs</h2>
+                    
+                    <p>La console en jeu s'ouvre avec la touche <kbd>~</kbd> (ou la touche console selon ton clavier). Pour l'Output Log complet, va dans <strong>Window → Developer Tools → Output Log</strong>.</p>
+                    
+                    <h4>Lister toutes les commandes</h4>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>DumpConsoleCommands</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                </section>
+                
+                <!-- STAT -->
+                <section id="stat">
+                    <h2>Commandes STAT</h2>
+                    <p>Les commandes <code>stat</code> sont ton premier réflexe pour diagnostiquer rapidement les performances.</p>
+                    
+                    <h3>FPS & Frame Time</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat fps</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Affiche les FPS</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat unit</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Game / Draw / GPU thread times</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat unitgraph</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Graphique des frame times</p>
+                    
+                    <h3>GPU & Rendu</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat gpu</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Stats GPU générales</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>profilegpu</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Ouvre le profiler GPU détaillé</p>
+                    
+                    <h3>CPU & Threads</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat game</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Stats game thread</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat scenerendering</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Stats du rendu de scène</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat rhi</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Stats RHI (Render Hardware Interface)</p>
+                    
+                    <h3>Mémoire & Streaming</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat memory</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Vue globale mémoire</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat streaming</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Textures streaming (Pool / Wanted / Over Budget)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat levels</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Niveaux / streaming de levels</p>
+                </section>
+                
+                <!-- PROFILING -->
+                <section id="profiling">
+                    <h2>Capture pour Analyse</h2>
+                    
+                    <p>Pour une analyse approfondie, capture les données de profiling dans un fichier.</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat startfile</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Démarre la capture</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat stopfile</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Arrête et génère le fichier</p>
+                    
+                    <div class="callout callout--info">
+                        <div class="callout-icon">🔧</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Unreal Insights</div>
+                            <p><strong>Unreal Insights</strong> est ton meilleur ami pour l'analyse CPU et les problèmes de chargement.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- STREAMING POOL -->
+                <section id="streaming">
+                    <h2>Texture Streaming Pool</h2>
+                    <p>Le streaming pool, c'est LE classique des problèmes de performance.</p>
+                    
+                    <h3>Voir & Comprendre</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>stat streaming</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Regarde "Pool" / "Wanted" / "Over Budget"</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.Streaming.PoolSize</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Affiche la taille actuelle du pool</p>
+                    
+                    <h3>Fix Rapide (temporaire)</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.Streaming.PoolSize 3000</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Définit le pool à 3000 MB</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.Streaming.LimitPoolSizeToVRAM 1</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Évite les valeurs incohérentes selon les machines</p>
+                    
+                    <h3>Debug Streaming Textures</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.TextureStreaming 1</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Activer le streaming</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.TextureStreaming 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Désactiver (pour comparer)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.Streaming.DropMips 1</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Force à lâcher des mips (test budget)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.Streaming.DropMips 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Retour normal</p>
+                    
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Workflow "Over Budget"</div>
+                            <p>Si tu vois "Over Budget", augmente temporairement le pool pour confirmer. Si ça revient, réduis la taille des textures ou utilise les Virtual Textures.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- SCALABILITY -->
+                <section id="scalability">
+                    <h2>Scalability & Qualité</h2>
+                    <p>Teste rapidement l'impact visuel vs performance. Valeurs de 0 (bas) à 4 (ultra).</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.ViewDistanceQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Distance de vue (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.ShadowQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité des ombres (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.TextureQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité des textures (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.EffectsQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité des effets (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.PostProcessQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité post-process (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.FoliageQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité foliage (0-4)</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>sg.AntiAliasingQuality 0</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Qualité anti-aliasing (0-4)</p>
+                    
+                    <h3>Gros Boutons</h3>
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.ScreenPercentage 50</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Résolution interne (50/70/100) — impact direct</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>r.ViewDistanceScale 0.5</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Réduit distance d'affichage</p>
+                </section>
+                
+                <!-- DEBUG VISUAL -->
+                <section id="debug-visual">
+                    <h2>Debug Visuel</h2>
+                    <p>Visualiser les collisions, la navigation IA et les animations.</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>show collision</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Affiche les collisions</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>showflag.collision 1</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Alternative selon versions</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>show Navigation</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Affiche le NavMesh</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>showdebug ai</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Infos IA</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>showdebug animation</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Debug Animation BP</p>
+                </section>
+                
+                <!-- MEMORY -->
+                <section id="memory">
+                    <h2>Mémoire & Rapports</h2>
+                    <p>Données concrètes sur l'utilisation mémoire.</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>memreport -full</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Rapport mémoire complet</p>
+                    
+                    <div class="cmd-copy" onclick="copyCmd(this)">
+                        <code>obj list class=Texture2D</code>
+                        <span class="cmd-copy-icon">📋</span>
+                    </div>
+                    <p class="cmd-desc">Liste tous les objets d'un type (remplace Texture2D par n'importe quelle classe)</p>
+                </section>
+                
+                <hr>
+                
+                <!-- KIT DE SURVIE -->
+                <section id="kit">
+                    <h2>Kit de Survie</h2>
+                    <p>Les essentiels pour un diagnostic rapide.</p>
+                    
+                    <div class="kit-section">
+                        <h4 class="kit-title">⚡ Perf Rapide</h4>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>stat unit</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>stat gpu</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>profilegpu</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                    </div>
+                    
+                    <div class="kit-section">
+                        <h4 class="kit-title">⚡ Streaming Pool</h4>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>stat streaming</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>r.Streaming.PoolSize 3000</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>r.Streaming.LimitPoolSizeToVRAM 1</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                    </div>
+                    
+                    <div class="kit-section">
+                        <h4 class="kit-title">⚡ Baisser la Qualité</h4>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>sg.ShadowQuality 0</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                        <div class="cmd-copy" onclick="copyCmd(this)">
+                            <code>r.ScreenPercentage 70</code>
+                            <span class="cmd-copy-icon">📋</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- FOOTER AD -->
+                <div class="footer-ad">
+                    <span class="ad-label">Publicité</span>
+                    <div class="ad-placeholder">728×90 Leaderboard</div>
+                </div>
+                
+                <!-- FOOTER -->
+                <footer class="footer">
+                    <p class="footer-text">
+                        Créé avec 💜 par <span class="footer-brand">Nizeus</span> — <a href="https://www.instagram.com/nizoz_studio/" target="_blank" rel="noopener">NIZOZ Studio</a> · <a href="https://discord.gg/KHJtUuA92V" target="_blank" rel="noopener">Discord</a> · <a href="index.html#contact">Contact</a>
+                    </p>
+                </footer>
+            </article>
+        </main>
+    </div>
+    
+    <!-- Toast notification -->
+    <div class="toast" id="toast">Copié !</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

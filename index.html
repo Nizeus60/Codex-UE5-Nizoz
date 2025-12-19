@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex UE5 par Nizeus | NIZOZ Studio</title>
+    <meta name="description" content="Un recueil vivant d’astuces et de méthodes pour Unreal Engine 5 et la création de jeux : commandes, raccourcis, debug, optimisation, Blueprints, VFX, workflow… Tout ce que j’ai appris et que j’utilise en prod. Par Nizeus.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">UE</div>
+                <span class="logo-text">Codex UE5</span>
+                <span class="logo-badge">by Nizeus</span>
+            </a>
+            
+            <div class="header-actions">
+                <a href="#contact" class="nav-back">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème" role="switch">
+                    <div class="theme-toggle-thumb">
+                        <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                        <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+                            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Le Codex UE5
+                <span class="hero-highlight">le recueil de terrain d’un dev</span>
+            </h1>
+            <p class="hero-subtitle">
+                Un site pensé comme un <strong>recueil</strong> : commandes, raccourcis, méthodes, et retours d’expérience sur <strong>UE5</strong> et la création de jeux en général. Du concret, du vécu, et des explications quand ça compte.
+            </p>
+            <div class="hero-cta">
+                <a href="#guides" class="btn btn--primary">Explorer les guides</a>
+                <a href="#about" class="btn btn--secondary">À propos</a>
+                <a href="#contact" class="btn btn--secondary">Contact</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+    
+    <!-- GUIDES SECTION -->
+    <section class="section" id="guides">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Les Guides</h2>
+                <p class="section-subtitle">Un recueil d’infos et d’astuces : du “copier‑coller” utile, et des explications claires quand il faut comprendre le pourquoi.</p>
+            </div>
+            
+            <div class="guides-grid">
+                <!-- Guide Card: Pense-Bête -->
+                <a href="pense-bete.html" class="guide-card">
+                    <div class="guide-card-icon">⚡</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">Pense-Bête UE5</h3>
+                        <p class="guide-card-desc">Commandes console, raccourcis clavier, debug performance, streaming pool. L'essentiel pour aller vite.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Console</span>
+                            <span class="tag">Debug</span>
+                            <span class="tag">Performance</span>
+                        </div>
+                    </div>
+                    <div class="guide-card-arrow">→</div>
+                </a>
+                
+                <!-- Guide Card: Coming Soon 1 -->
+                <div class="guide-card guide-card--coming">
+                    <div class="guide-card-icon">🎮</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">Blueprints Avancés</h3>
+                        <p class="guide-card-desc">Patterns, optimisation, communication entre Blueprints, et bonnes pratiques pour des projets scalables.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Blueprints</span>
+                            <span class="tag">Architecture</span>
+                        </div>
+                    </div>
+                    <span class="guide-card-soon">Bientôt</span>
+                </div>
+                
+                <!-- Guide Card: Coming Soon 2 -->
+                <div class="guide-card guide-card--coming">
+                    <div class="guide-card-icon">✨</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">Niagara & VFX</h3>
+                        <p class="guide-card-desc">Création de particules, optimisation, GPU particles, et intégration dans le gameplay.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Niagara</span>
+                            <span class="tag">VFX</span>
+                            <span class="tag">GPU</span>
+                        </div>
+                    </div>
+                    <span class="guide-card-soon">Bientôt</span>
+                </div>
+                
+                <!-- Guide Card: Coming Soon 3 -->
+                <div class="guide-card guide-card--coming">
+                    <div class="guide-card-icon">🔧</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">Chaos Physics</h3>
+                        <p class="guide-card-desc">Destruction, physics constraints, optimisation Chaos, et debugging des simulations.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Physics</span>
+                            <span class="tag">Destruction</span>
+                        </div>
+                    </div>
+                    <span class="guide-card-soon">Bientôt</span>
+                </div>
+                
+                <!-- Guide Card: Coming Soon 4 -->
+                <div class="guide-card guide-card--coming">
+                    <div class="guide-card-icon">🗺️</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">World Partition</h3>
+                        <p class="guide-card-desc">Streaming de niveaux, Data Layers, HLOD, et gestion des grands mondes ouverts.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Open World</span>
+                            <span class="tag">Streaming</span>
+                        </div>
+                    </div>
+                    <span class="guide-card-soon">Bientôt</span>
+                </div>
+                
+                <!-- Guide Card: Coming Soon 5 -->
+                <div class="guide-card guide-card--coming">
+                    <div class="guide-card-icon">📦</div>
+                    <div class="guide-card-content">
+                        <h3 class="guide-card-title">Packaging & Build</h3>
+                        <p class="guide-card-desc">Configuration du build, optimisation de la taille, shipping settings, et déploiement Steam.</p>
+                        <div class="guide-card-tags">
+                            <span class="tag">Build</span>
+                            <span class="tag">Steam</span>
+                            <span class="tag">Release</span>
+                        </div>
+                    </div>
+                    <span class="guide-card-soon">Bientôt</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AD BANNER -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-banner">
+                <span class="ad-label">Publicité</span>
+                <div class="ad-placeholder">728×90 Leaderboard</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ABOUT SECTION -->
+    <section class="section section--alt" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">Pourquoi ce codex ?</h2>
+                    <p>Je suis <strong>Nizeus</strong>, développeur indépendant et co‑fondateur de <strong>NIZOZ Studio</strong>. Je construis des jeux (dont <strong>Elevium</strong> et <strong>Duir Awen</strong>) et, au fil des builds, j’ai accumulé un paquet de notes : commandes, réglages, pièges classiques, et “petites vérités” qu’on apprend souvent à la dure.</p>
+                    <p>Ce site est un <strong>recueil</strong> : un endroit où je regroupe ce que j’utilise (ou ai utilisé) pendant mon parcours. Tu y trouveras des pages ultra pratiques, et d’autres plus “techniques” : <em>pourquoi utiliser ce node plutôt qu’un autre</em>, <em>comment structurer un système</em>, <em>quoi éviter</em>, etc.</p>
+                    <p>À terme, le codex s’ouvrira aussi à des sujets plus larges autour de la création de jeux (workflow, design, production, IA appliquée au projet…). Toujours avec la même promesse : <strong>simple, fluide, détaillé quand c’est nécessaire</strong>.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-value">UE5.x</span>
+                            <span class="stat-label">Version cible</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Gratuit</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">∞</span>
+                            <span class="stat-label">Mises à jour</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-card-header">
+                        <div class="about-avatar">N</div>
+                        <div>
+                            <h3 class="about-name">Nizeus</h3>
+                            <p class="about-role">Game developer · Co‑fondateur NIZOZ Studio</p>
+                        </div>
+                    </div>
+                    <div class="about-card-body">
+                        <p>Je partage ici mes notes de dev : ce qui marche, ce qui casse, et les raccourcis qui font gagner des heures sur UE5.</p>
+                    </div>
+                    <div class="about-card-footer">
+                        <a href="https://www.instagram.com/nizoz_studio/" class="about-link" target="_blank" rel="noopener">Instagram NIZOZ Studio →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- NEWSLETTER / CTA SECTION -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Nouveau guide en préparation</h2>
+                <p class="cta-text">Je bosse actuellement sur le guide Blueprints Avancés. Reste connecté pour ne rien manquer !</p>
+                <div class="cta-actions">
+                    <a href="#guides" class="btn btn--primary">Voir les guides disponibles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- CONTACT SECTION -->
+    <section class="section section--alt" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Une question, une correction, une astuce à partager ? Écris‑moi. Je lis tout (quand je ne suis pas en train de compiler des shaders 😄).</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3 class="contact-title">Envoyer un message</h3>
+                    <p class="contact-text">Le formulaire ouvre ton client mail avec un sujet prérempli. (Pas de compte, pas de tracking.)</p>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="contactName">Pseudo / Nom</label>
+                                <input id="contactName" name="name" type="text" placeholder="Ex: Kael_Dev" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="contactHandle">Moyen de te recontacter</label>
+                                <input id="contactHandle" name="handle" type="text" placeholder="Email, Discord, Insta… (ex: toto#1234)" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contactTitle">Titre</label>
+                            <input id="contactTitle" name="title" type="text" placeholder="Ex: Problème de streaming pool / suggestion" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" name="message" rows="6" placeholder="Décris ton contexte, ce que tu as testé, et ce que tu attends." required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary">Ouvrir l’email</button>
+                            <a class="btn btn--secondary" href="mailto:nizoz.studio@gmail.com">Contact direct</a>
+                        </div>
+
+                        <p class="contact-hint">Sujet automatique : <code>[Contact-Site-Guide] + ton titre</code></p>
+                    </form>
+                </div>
+
+                <div class="contact-card contact-card--links">
+                    <h3 class="contact-title">Réseaux</h3>
+                    <p class="contact-text">Tu peux aussi me ping ici :</p>
+                    <ul class="contact-links">
+                        <li><a href="https://discord.gg/KHJtUuA92V" target="_blank" rel="noopener">Discord — Communauté</a></li>
+                        <li><a href="https://www.instagram.com/nizoz_studio/" target="_blank" rel="noopener">Instagram — NIZOZ Studio</a></li>
+                        <li><a href="mailto:nizoz.studio@gmail.com">Email — nizoz.studio@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">UE</div>
+                        <span class="logo-text">Codex UE5</span>
+                    </a>
+                    <p class="footer-tagline">Un recueil de terrain, mis à jour au fil des projets.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="pense-bete.html">Pense-Bête UE5</a></li>
+                            <li><span class="coming">Blueprints Avancés</span></li>
+                            <li><span class="coming">Niagara & VFX</span></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Liens</h4>
+                        <ul>
+                            <li><a href="https://www.instagram.com/nizoz_studio/" target="_blank" rel="noopener">Instagram</a></li>
+                            <li><a href="https://discord.gg/KHJtUuA92V" target="_blank" rel="noopener">Discord</a></li>
+                            <li><a href="mailto:nizoz.studio@gmail.com?subject=%5BContact-Site-Guide%5D%20Bonjour">Contact</a></li>
+</ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Nizeus — NIZOZ Studio. Fait avec 💜 pour la communauté UE5.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.contactfix.js"></script>
+</body>
+</html>
