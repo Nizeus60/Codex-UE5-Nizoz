@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aizoz — Framework IA Compagnon | Codex UE5 par Nizeus</title>
+    <meta name="description" content="Aizoz : un framework modulaire pour intégrer une IA compagnon locale dans vos jeux Unreal Engine 5. Multi-personnalités, mémoire persistante, Text-to-Speech, 100% local et commercial-ready.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">UE</div>
+                <span class="logo-text">Codex UE5</span>
+                <span class="logo-badge">by Nizeus</span>
+            </a>
+            
+            <div class="header-actions">
+                <a href="index.html" class="nav-back">← Accueil</a>
+                <a href="index.html#contact" class="nav-back">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème" role="switch">
+                    <div class="theme-toggle-thumb">
+                        <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                        <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+                            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- LAYOUT -->
+    <div class="layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Vue d'ensemble</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#intro" class="nav-link active">Introduction</a></li>
+                        <li class="nav-item"><a href="#vision" class="nav-link">Vision du projet</a></li>
+                        <li class="nav-item"><a href="#features" class="nav-link">Fonctionnalités</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Architecture</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#stack" class="nav-link">Stack technique</a></li>
+                        <li class="nav-item"><a href="#structure" class="nav-link">Structure des fichiers</a></li>
+                        <li class="nav-item"><a href="#config" class="nav-link">Configuration</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Personnalités</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#personalities" class="nav-link">Multi-personnalités</a></li>
+                        <li class="nav-item"><a href="#personality-file" class="nav-link">Fichier personality.md</a></li>
+                        <li class="nav-item"><a href="#jock" class="nav-link">Exemple : Jock</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Mémoire & Knowledge</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#memory" class="nav-link">Système de mémoire</a></li>
+                        <li class="nav-item"><a href="#knowledge" class="nav-link">Base de connaissances</a></li>
+                        <li class="nav-item"><a href="#events" class="nav-link">Events loggés</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Intégration UE5</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#plugin" class="nav-link">Plugin Blueprint</a></li>
+                        <li class="nav-item"><a href="#nodes" class="nav-link">Nodes disponibles</a></li>
+                        <li class="nav-item"><a href="#workflow" class="nav-link">Workflow type</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Sécurité & Stabilité</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#safety" class="nav-link">Protection RP</a></li>
+                        <li class="nav-item"><a href="#stability" class="nav-link">Gestion des crashs</a></li>
+                        <li class="nav-item"><a href="#antispam" class="nav-link">Anti-spam</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Technique</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#specs" class="nav-link">Specs requises</a></li>
+                        <li class="nav-item"><a href="#languages" class="nav-link">Langues supportées</a></li>
+                        <li class="nav-item"><a href="#licenses" class="nav-link">Licences</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Roadmap</div>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#phases" class="nav-link">Phases de dev</a></li>
+                        <li class="nav-item"><a href="#v2" class="nav-link">Évolutions futures</a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-sidebar">
+                <span class="ad-label">Publicité</span>
+                <div class="ad-placeholder">300×250</div>
+            </div>
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main class="main">
+            <article class="content">
+                <h1 class="page-title">🤖 Aizoz</h1>
+                <p class="page-subtitle">Framework d'IA compagnon modulaire pour Unreal Engine 5. Local, personnalisable, commercial-ready.</p>
+                
+                <!-- INTRO -->
+                <section id="intro">
+                    <div class="callout callout--info">
+                        <div class="callout-icon">ℹ</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Qu'est-ce qu'Aizoz ?</div>
+                            <p>Aizoz est un framework complet pour intégrer une <strong>IA compagnon intelligente</strong> dans vos jeux UE5. Bracelet magique, familier, drone, assistant... L'IA prend la forme que vous voulez et s'adapte à votre univers.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- VISION -->
+                <section id="vision">
+                    <h2>Vision du Projet</h2>
+                    <p>Aizoz est né d'un besoin simple : avoir un compagnon de jeu qui <strong>se souvient</strong> de ce que le joueur a fait, qui peut <strong>répondre à ses questions</strong> sur le monde du jeu, et qui a une <strong>vraie personnalité</strong>.</p>
+                    
+                    <p>Le framework est conçu pour être :</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">🔧</div>
+                            <div class="feature-content">
+                                <h4>Modulaire</h4>
+                                <p>Un dossier par projet. Tu changes la personnalité et le lore, le reste fonctionne.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔒</div>
+                            <div class="feature-content">
+                                <h4>100% Local</h4>
+                                <p>Aucune dépendance cloud. Tout tourne sur la machine du joueur.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">💰</div>
+                            <div class="feature-content">
+                                <h4>Commercial-Ready</h4>
+                                <p>Toutes les licences sont OK pour la distribution commerciale.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🎮</div>
+                            <div class="feature-content">
+                                <h4>Intégré UE5</h4>
+                                <p>Plugin avec nodes Blueprint. Zéro code C++ requis de ton côté.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- FEATURES -->
+                <section id="features">
+                    <h2>Fonctionnalités v1</h2>
+                    
+                    <div class="feature-list">
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span>Chat texte avec réponses en <strong>streaming</strong> (mot par mot)</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Multi-personnalités</strong> switchables en jeu (timide, espiègle, neutre...)</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Mémoire persistante</strong> par sauvegarde de jeu</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Base de connaissances</strong> personnalisée (lore, PNJ, lieux, objets)</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span>L'IA peut <strong>déclencher des actions</strong> dans le jeu</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Text-to-Speech</strong> local via PiperTTS</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>5 langues</strong> supportées (FR, EN, ES, DE, IT)</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span>Protection stricte <strong>anti-hors-RP</strong></span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Anti-spam</strong> : 1 requête à la fois</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span>Serveur <strong>auto-lancé/fermé</strong> avec le jeu</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span>Package <strong>.exe tout-en-un</strong> (~30 Go)</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- STACK -->
+                <section id="stack">
+                    <h2>Stack Technique</h2>
+                    
+                    <h3>Backend (Python 3.11+)</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <code>Ollama</code>
+                            <span>Runtime LLM local (Mistral 7B / Llama 3 8B)</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>ChromaDB</code>
+                            <span>Base vectorielle pour le RAG</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>FastAPI</code>
+                            <span>Serveur API REST</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>PiperTTS</code>
+                            <span>Synthèse vocale locale</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>Whisper.cpp</code>
+                            <span>Reconnaissance vocale (v2)</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>SQLite</code>
+                            <span>Stockage mémoire persistante</span>
+                        </div>
+                    </div>
+                    
+                    <h3>Plugin UE5 (C++ / Blueprint)</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <code>HTTP Module</code>
+                            <span>Communication native UE5</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>Async Tasks</code>
+                            <span>Appels non-bloquants</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>BP Function Library</code>
+                            <span>Nodes Blueprint exposés</span>
+                        </div>
+                        <div class="tech-item">
+                            <code>Sound Wave</code>
+                            <span>Audio TTS dynamique</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- STRUCTURE -->
+                <section id="structure">
+                    <h2>Structure des Fichiers</h2>
+                    <p>Chaque projet de jeu possède son propre dossier de configuration. Le Core reste identique.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>Aizoz/
+├── core/                        <span class="code-comment"># Moteur IA (ne pas modifier)</span>
+│   ├── llm_engine.py           <span class="code-comment"># Interface Ollama</span>
+│   ├── memory_system.py        <span class="code-comment"># Gestion mémoire court/long terme</span>
+│   ├── knowledge_base.py       <span class="code-comment"># RAG + embeddings</span>
+│   ├── tts_engine.py           <span class="code-comment"># PiperTTS wrapper</span>
+│   └── stt_engine.py           <span class="code-comment"># Whisper wrapper (v2)</span>
+│
+├── server/                      <span class="code-comment"># API REST</span>
+│   └── api.py                  <span class="code-comment"># Endpoints FastAPI</span>
+│
+├── projects/                    <span class="code-comment"># UN DOSSIER PAR JEU</span>
+│   └── MonJeu/
+│       ├── config.json         <span class="code-comment"># Configuration projet</span>
+│       ├── knowledge/          <span class="code-comment"># Base de connaissances commune</span>
+│       │   ├── characters/     <span class="code-comment"># Fiches PNJ</span>
+│       │   ├── locations/      <span class="code-comment"># Descriptions lieux</span>
+│       │   ├── items/          <span class="code-comment"># Objets importants</span>
+│       │   └── lore/           <span class="code-comment"># Histoire du monde</span>
+│       ├── personalities/      <span class="code-comment"># Personnalités disponibles</span>
+│       │   ├── espiegle/
+│       │   │   ├── personality.md
+│       │   │   └── specific/   <span class="code-comment"># Infos propres à cette perso</span>
+│       │   ├── timide/
+│       │   └── neutre/
+│       └── saves/              <span class="code-comment"># Mémoires par sauvegarde (auto)</span>
+│           ├── save_001/
+│           └── save_002/
+│
+└── unreal_plugin/               <span class="code-comment"># Plugin UE5</span>
+    ├── Aizoz.uplugin
+    └── Source/</code></pre>
+                    </div>
+                </section>
+                
+                <!-- CONFIG -->
+                <section id="config">
+                    <h3>Fichier config.json</h3>
+                    <p>Configuration technique du projet. Permet d'ajuster les paramètres sans toucher au code.</p>
+                    
+                    <div class="code-block code-block--json">
+                        <pre><code>{
+  "companion_name": "Jock",
+  "default_personality": "espiegle",
+  "llm_model": "mistral:7b-instruct-q4_K_M",
+  "voice_model": "fr_FR-siwis-medium",
+  "language": "fr",
+  "memory_retention_days": 30,
+  "memory_max_size_gb": 5,
+  "max_response_tokens": 150,
+  "enable_tts": true,
+  "enable_stt": false,
+  "game_actions_enabled": true,
+  "streaming_responses": true,
+  "anti_spam_enabled": true
+}</code></pre>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- PERSONALITIES -->
+                <section id="personalities">
+                    <h2>Système Multi-Personnalités</h2>
+                    <p>Aizoz supporte plusieurs personnalités pour le même compagnon. Toutes partagent la <strong>même base de connaissances</strong> et la <strong>même mémoire</strong>, seul le style de réponse change.</p>
+                    
+                    <div class="callout callout--tip">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Cas d'usage</div>
+                            <p>Le joueur peut changer l'humeur de son compagnon dans les settings, ou l'histoire peut déclencher un changement de personnalité (événement traumatisant, buff temporaire, etc.).</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Architecture</h3>
+                    <div class="code-block">
+                        <pre><code>personalities/
+├── espiegle/
+│   ├── personality.md          <span class="code-comment"># Style espiègle</span>
+│   └── specific/               <span class="code-comment"># Blagues, réactions propres</span>
+│       └── blagues.md
+├── timide/
+│   ├── personality.md          <span class="code-comment"># Style timide</span>
+│   └── specific/
+│       └── reactions.md
+├── neutre/
+│   └── personality.md          <span class="code-comment"># Style neutre (pas de specific)</span>
+└── enjoue/
+    └── personality.md</code></pre>
+                    </div>
+                    
+                    <h3>Réponse API</h3>
+                    <p>Chaque réponse de l'IA inclut la personnalité active, permettant d'adapter l'UI ou les animations.</p>
+                    
+                    <div class="code-block code-block--json">
+                        <pre><code>{
+  "success": true,
+  "response": "Hé chef, tu te souviens de ce piège là-bas ?",
+  "personality": "espiegle",
+  "emotion": "curious",
+  "audio_base64": "UklGRi4A..."
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- PERSONALITY FILE -->
+                <section id="personality-file">
+                    <h3>Format du fichier personality.md</h3>
+                    <p>Un fichier Markdown simple qui définit entièrement le comportement de l'IA.</p>
+                    
+                    <div class="code-block code-block--md">
+                        <pre><code># [NOM DU COMPAGNON]
+
+## Identité
+- Nom : [Nom]
+- Nature : [Ce qu'il est dans l'univers du jeu]
+- Âge apparent : [Perception]
+
+## Personnalité
+- [Trait 1]
+- [Trait 2]
+- [Trait 3]
+
+## Style de parole
+- [Comment il s'adresse au joueur]
+- [Longueur des phrases]
+- [Tics de langage, expressions favorites]
+
+## Ce qu'il NE FAIT JAMAIS
+- [Comportement interdit 1]
+- [Comportement interdit 2]
+
+## Exemples de réponses
+- Situation 1 : "[Réponse type]"
+- Situation 2 : "[Réponse type]"</code></pre>
+                    </div>
+                </section>
+                
+                <!-- JOCK EXAMPLE -->
+                <section id="jock">
+                    <h3>Exemple : Jock (Espiègle)</h3>
+                    <p>Voici la personnalité de test fournie avec Aizoz.</p>
+                    
+                    <div class="code-block code-block--md">
+                        <pre><code># JOCK
+
+## Identité
+- Nom : Jock
+- Nature : Fragment d'énergie ancienne lié au bracelet du joueur
+- Âge apparent : Adolescent espiègle, curieux de tout
+
+## Personnalité
+- Curieux : pose des questions sur tout ce qu'il voit
+- Sarcastique : fait des remarques moqueuses mais jamais méchantes
+- Protecteur : s'inquiète sincèrement pour le joueur
+- Impatient : n'aime pas attendre, pousse à l'action
+- Fier : aime quand le joueur réussit, le félicite à sa manière
+
+## Style de parole
+- Tutoie toujours le joueur
+- Phrases courtes : 2-3 phrases max par réponse
+- Utilise des surnoms : "chef", "boss", "l'ami", "mon gars"
+- Commence souvent par "Hé" ou "Oh"
+- Ponctue avec des "..." quand il réfléchit
+
+## Ce qu'il NE FAIT JAMAIS
+- Ne sort jamais de son rôle de compagnon
+- Ne parle jamais de sujets hors du jeu
+- Ne donne jamais d'informations qu'il ne connaît pas
+- Ne fait jamais de remarques inappropriées
+- Ne contredit jamais les faits établis du lore
+
+## Exemples de réponses
+- Joueur tombe : "Gracieux. Très gracieux, chef."
+- Découverte d'un lieu : "Oh, c'est nouveau ça ! On explore ?"
+- Rappel de PNJ : "Le vieux grincheux du village ? Il t'a dit que..."
+- Joueur bloqué : "Hé, t'as essayé par là-bas ? Juste une idée..."
+- Victoire en combat : "Pas mal ! Bon, c'était pas non plus le boss final..."
+- Info inconnue : "Ça... j'en sais rien chef. Première fois que j'entends ça."</code></pre>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- MEMORY -->
+                <section id="memory">
+                    <h2>Système de Mémoire</h2>
+                    <p>Le compagnon possède trois niveaux de mémoire pour des réponses contextuelles et pertinentes.</p>
+                    
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Durée</th>
+                                    <th>Contenu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Immédiate</strong></td>
+                                    <td>Conversation en cours</td>
+                                    <td>Contexte de la discussion actuelle</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Court terme</strong></td>
+                                    <td>Session de jeu</td>
+                                    <td>Events récents, dialogues, actions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Long terme</strong></td>
+                                    <td>Persistante (30 jours par défaut)</td>
+                                    <td>Faits importants, choix narratifs, relations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Mémoire par sauvegarde</h3>
+                    <p>Chaque slot de sauvegarde a sa propre mémoire. Si le joueur a 3 parties en cours, le compagnon a 3 "vies" distinctes.</p>
+                    
+                    <div class="callout callout--info">
+                        <div class="callout-icon">💾</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Capacité</div>
+                            <p>Limite par défaut : <strong>5 Go</strong> par projet. Suffisant pour ~2000 heures de jeu avec logging intensif.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Oubli réaliste</h3>
+                    <p>Pour éviter que la base ne grossisse indéfiniment, un système d'importance (1-10) est appliqué à chaque event. Les events peu importants sont automatiquement compressés ou supprimés après un certain temps.</p>
+                </section>
+                
+                <!-- KNOWLEDGE -->
+                <section id="knowledge">
+                    <h3>Base de Connaissances</h3>
+                    <p>Le dossier <code>knowledge/</code> contient tout ce que l'IA "sait" sur le monde du jeu. Formats supportés : <code>.md</code>, <code>.txt</code>, <code>.json</code>.</p>
+                    
+                    <h4>Exemple : characters/elena.md</h4>
+                    <div class="code-block code-block--md">
+                        <pre><code># Elena la Sage
+
+## Informations générales
+- Rôle : Archimage du village de Valdris
+- Lieu : Tour des Arcanes (nord du village)
+- Âge : ~60 ans (apparence), réellement 200+
+
+## Personnalité
+- Sage et patiente
+- Parle par énigmes
+- Cache un lourd secret
+
+## Relations
+- Mentor du héros dans sa jeunesse
+- Ennemie jurée de Malachar le Noir
+
+## Dialogues importants
+- Première rencontre : Donne la quête "Les Cristaux Perdus"
+- Après la quête : Révèle l'existence du temple caché
+
+## Secret (spoiler)
+- Connaît l'emplacement exact du Cristal Ancien
+- Ne le révélera qu'après la quête "Confiance Absolue"</code></pre>
+                    </div>
+                    
+                    <div class="callout callout--tip">
+                        <div class="callout-icon">🔄</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Mise à jour automatique</div>
+                            <p>Les fichiers sont ré-indexés au démarrage si modifiés. Tu peux patcher ton jeu et ajouter du contenu sans rien reconfigurer.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- EVENTS -->
+                <section id="events">
+                    <h3>Events Loggés</h3>
+                    <p>Le plugin UE5 capture automatiquement ces types d'événements :</p>
+                    
+                    <div class="event-grid">
+                        <div class="event-item">
+                            <code>DIALOGUE</code>
+                            <span>Conversations avec les PNJ (qui, quoi, où, quand)</span>
+                        </div>
+                        <div class="event-item">
+                            <code>ACTION</code>
+                            <span>Actions significatives (combats, crafts, découvertes)</span>
+                        </div>
+                        <div class="event-item">
+                            <code>LOCATION</code>
+                            <span>Lieux visités et temps passé</span>
+                        </div>
+                        <div class="event-item">
+                            <code>ITEM</code>
+                            <span>Objets récupérés, utilisés, ou perdus</span>
+                        </div>
+                        <div class="event-item">
+                            <code>QUEST</code>
+                            <span>Progression des quêtes et choix narratifs</span>
+                        </div>
+                        <div class="event-item">
+                            <code>DEATH</code>
+                            <span>Morts du joueur (cause, lieu, nombre)</span>
+                        </div>
+                        <div class="event-item">
+                            <code>CUSTOM</code>
+                            <span>Events personnalisés définis par le développeur</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- PLUGIN -->
+                <section id="plugin">
+                    <h2>Plugin Unreal Engine 5</h2>
+                    <p>Le plugin expose des nodes Blueprint natifs. <strong>Aucun code C++</strong> requis de ton côté.</p>
+                    
+                    <div class="callout callout--info">
+                        <div class="callout-icon">🎯</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Compatibilité</div>
+                            <p>UE5 <strong>5.5+</strong> requis. Testé sur 5.5 et 5.7.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- NODES -->
+                <section id="nodes">
+                    <h3>Nodes Blueprint Disponibles</h3>
+                    
+                    <h4>💬 Communication</h4>
+                    <div class="node-list">
+                        <div class="node-item">
+                            <div class="node-name">Send Message To Companion</div>
+                            <div class="node-desc">Envoie un message texte, reçoit réponse + audio</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Message (String)</span>
+                                <span class="pin pin--in">Context Tags (Array)</span>
+                                <span class="pin pin--out">Response (String)</span>
+                                <span class="pin pin--out">Audio (Sound Wave)</span>
+                                <span class="pin pin--out">Personality (String)</span>
+                                <span class="pin pin--out">On Response →</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Set Companion Personality</div>
+                            <div class="node-desc">Change la personnalité active</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Personality ID (String)</span>
+                                <span class="pin pin--out">On Changed →</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Get Companion Status</div>
+                            <div class="node-desc">Vérifie si le serveur est actif et prêt</div>
+                            <div class="node-pins">
+                                <span class="pin pin--out">Is Ready (Bool)</span>
+                                <span class="pin pin--out">Current Personality (String)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4>📝 Logging</h4>
+                    <div class="node-list">
+                        <div class="node-item">
+                            <div class="node-name">Log Dialogue Event</div>
+                            <div class="node-desc">Enregistre une conversation PNJ</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">NPC Name (String)</span>
+                                <span class="pin pin--in">Dialogue Text (String)</span>
+                                <span class="pin pin--in">Location (String)</span>
+                                <span class="pin pin--in">Importance (Float 0-10)</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Log Action Event</div>
+                            <div class="node-desc">Enregistre une action joueur</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Action Type (Enum)</span>
+                                <span class="pin pin--in">Description (String)</span>
+                                <span class="pin pin--in">Importance (Float 0-10)</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Log Custom Event</div>
+                            <div class="node-desc">Enregistre un event personnalisé</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Event Type (String)</span>
+                                <span class="pin pin--in">Data (Map)</span>
+                                <span class="pin pin--in">Importance (Float 0-10)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4>🧠 Mémoire</h4>
+                    <div class="node-list">
+                        <div class="node-item">
+                            <div class="node-name">Query Memory</div>
+                            <div class="node-desc">Recherche dans les souvenirs du compagnon</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Query (String)</span>
+                                <span class="pin pin--in">Max Results (Int)</span>
+                                <span class="pin pin--out">Results (Array)</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Set Save ID</div>
+                            <div class="node-desc">Définit la sauvegarde active (pour la mémoire)</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Save ID (String)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4>🎮 Actions In-Game</h4>
+                    <div class="node-list">
+                        <div class="node-item">
+                            <div class="node-name">On Companion Action Requested</div>
+                            <div class="node-desc">Event déclenché quand l'IA veut agir dans le jeu</div>
+                            <div class="node-pins">
+                                <span class="pin pin--out">Action Type (Enum)</span>
+                                <span class="pin pin--out">Target (String)</span>
+                                <span class="pin pin--out">Parameters (Map)</span>
+                            </div>
+                        </div>
+                        <div class="node-item">
+                            <div class="node-name">Register Game Action</div>
+                            <div class="node-desc">Déclare une action que l'IA peut déclencher</div>
+                            <div class="node-pins">
+                                <span class="pin pin--in">Action Name (String)</span>
+                                <span class="pin pin--in">Description (String)</span>
+                                <span class="pin pin--in">Parameters Schema (Map)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- WORKFLOW -->
+                <section id="workflow">
+                    <h3>Workflow Type</h3>
+                    <p>Exemple : le joueur parle à un PNJ et veut pouvoir retrouver cette info plus tard.</p>
+                    
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Le joueur parle à Marcus le Forgeron</h5>
+                                <p>Dialogue classique dans ton système de dialogues UE5.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Tu appelles Log Dialogue Event</h5>
+                                <p><code>NPC: "Marcus", Text: "La clé est cachée sous le pont nord", Importance: 8</code></p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>L'event est stocké dans la mémoire</h5>
+                                <p>Indexé avec le contexte (lieu, timestamp, quête active...).</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Plus tard, le joueur demande à Jock</h5>
+                                <p>"Hé, qu'est-ce que le forgeron m'a dit déjà ?"</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h5>Jock retrouve l'info et répond</h5>
+                                <p>"Marcus ? Il t'a dit que la clé était planquée sous le pont nord, chef."</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- SAFETY -->
+                <section id="safety">
+                    <h2>Protection RP</h2>
+                    <p>L'IA doit <strong>absolument</strong> rester dans son rôle. Plusieurs couches de protection sont en place.</p>
+                    
+                    <div class="safety-layers">
+                        <div class="safety-item">
+                            <div class="safety-icon">🛡️</div>
+                            <div class="safety-content">
+                                <h4>System Prompt Blindé</h4>
+                                <p>Instructions strictes au modèle : ne jamais sortir du rôle, ne jamais inventer d'informations, toujours rester dans l'univers du jeu.</p>
+                            </div>
+                        </div>
+                        <div class="safety-item">
+                            <div class="safety-icon">🚫</div>
+                            <div class="safety-content">
+                                <h4>Liste de Comportements Interdits</h4>
+                                <p>Définissable dans <code>personality.md</code>. L'IA refuse explicitement certains types de réponses.</p>
+                            </div>
+                        </div>
+                        <div class="safety-item">
+                            <div class="safety-icon">🔍</div>
+                            <div class="safety-content">
+                                <h4>Filtre de Sortie</h4>
+                                <p>Vérification post-génération pour détecter les sorties de RP ou contenus inappropriés.</p>
+                            </div>
+                        </div>
+                        <div class="safety-item">
+                            <div class="safety-icon">❓</div>
+                            <div class="safety-content">
+                                <h4>Réponse Honnête</h4>
+                                <p>Si l'IA n'a pas l'info, elle dit "Je ne sais pas" plutôt que d'inventer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- STABILITY -->
+                <section id="stability">
+                    <h3>Gestion des Crashs</h3>
+                    
+                    <div class="crash-scenarios">
+                        <div class="crash-item">
+                            <h4>🎮 Si le jeu crash</h4>
+                            <p>Le serveur Aizoz détecte que le process parent a disparu et se ferme proprement. La mémoire est sauvegardée.</p>
+                        </div>
+                        <div class="crash-item">
+                            <h4>🖥️ Si le serveur crash</h4>
+                            <p>UE5 détecte la déconnexion via heartbeat. Un message s'affiche in-game : "Compagnon déconnecté". Un bouton permet de tenter une reconnexion.</p>
+                        </div>
+                        <div class="crash-item">
+                            <h4>🔄 Reconnexion</h4>
+                            <p>Le joueur peut relancer le serveur depuis le jeu. La mémoire de session est rechargée automatiquement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Important</div>
+                            <p>Le jeu continue de fonctionner sans l'IA. Les features compagnon sont simplement désactivées jusqu'à la reconnexion.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- ANTISPAM -->
+                <section id="antispam">
+                    <h3>Anti-Spam</h3>
+                    <p>Pour éviter les abus et garantir des réponses de qualité :</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>1 requête à la fois</strong> — Le joueur ne peut pas envoyer de nouveau message tant que la réponse précédente n'est pas complète</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Timeout</strong> — Si une réponse met plus de 30s, elle est annulée</span>
+                        </div>
+                        <div class="feature-row">
+                            <span class="feature-check">✓</span>
+                            <span><strong>Queue de messages</strong> — Les requêtes sont traitées dans l'ordre d'arrivée</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- SPECS -->
+                <section id="specs">
+                    <h2>Specs Requises</h2>
+                    <p>Configuration minimum pour le joueur final.</p>
+                    
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Composant</th>
+                                    <th>Minimum</th>
+                                    <th>Recommandé</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RAM</td>
+                                    <td>8 Go</td>
+                                    <td>16 Go</td>
+                                </tr>
+                                <tr>
+                                    <td>GPU VRAM</td>
+                                    <td>4 Go</td>
+                                    <td>8 Go</td>
+                                </tr>
+                                <tr>
+                                    <td>Stockage</td>
+                                    <td>10 Go (Aizoz seul)</td>
+                                    <td>30 Go (avec modèles optimaux)</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>4 cores récents</td>
+                                    <td>8 cores</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="callout callout--warning">
+                        <div class="callout-icon">⚠</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Config insuffisante</div>
+                            <p>Si le joueur n'a pas la config requise, un message s'affiche et l'IA ne se lance pas. Pas de mode dégradé — on préfère que ça marche bien ou pas du tout.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- LANGUAGES -->
+                <section id="languages">
+                    <h3>Langues Supportées (v1)</h3>
+                    
+                    <div class="lang-grid">
+                        <div class="lang-item">
+                            <span class="lang-flag">🇫🇷</span>
+                            <span class="lang-name">Français</span>
+                        </div>
+                        <div class="lang-item">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                        </div>
+                        <div class="lang-item">
+                            <span class="lang-flag">🇪🇸</span>
+                            <span class="lang-name">Español</span>
+                        </div>
+                        <div class="lang-item">
+                            <span class="lang-flag">🇩🇪</span>
+                            <span class="lang-name">Deutsch</span>
+                        </div>
+                        <div class="lang-item">
+                            <span class="lang-flag">🇮🇹</span>
+                            <span class="lang-name">Italiano</span>
+                        </div>
+                    </div>
+                    
+                    <p>La langue est définie dans les settings du jeu. L'IA répond dans la langue configurée.</p>
+                </section>
+                
+                <!-- LICENSES -->
+                <section id="licenses">
+                    <h3>Licences (Commercial OK)</h3>
+                    <p>Toutes les dépendances sont compatibles avec une distribution commerciale.</p>
+                    
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Composant</th>
+                                    <th>Licence</th>
+                                    <th>Commercial</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ollama</td>
+                                    <td>MIT</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Mistral 7B</td>
+                                    <td>Apache 2.0</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Llama 3 8B</td>
+                                    <td>Llama 3 License</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>PiperTTS</td>
+                                    <td>MIT</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>Whisper.cpp</td>
+                                    <td>MIT</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>ChromaDB</td>
+                                    <td>Apache 2.0</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>FastAPI</td>
+                                    <td>MIT</td>
+                                    <td>✅</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- PHASES -->
+                <section id="phases">
+                    <h2>Phases de Développement</h2>
+                    
+                    <div class="phase-timeline">
+                        <div class="phase-item phase-item--current">
+                            <div class="phase-marker">1</div>
+                            <div class="phase-content">
+                                <h4>Core + API</h4>
+                                <p>Serveur Python complet : LLM, mémoire, RAG, TTS. Interface de test CLI.</p>
+                                <span class="phase-status">En cours</span>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-marker">2</div>
+                            <div class="phase-content">
+                                <h4>Plugin UE5</h4>
+                                <p>Nodes Blueprint, communication HTTP, event dispatchers.</p>
+                                <span class="phase-status">À venir</span>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-marker">3</div>
+                            <div class="phase-content">
+                                <h4>Voix (TTS)</h4>
+                                <p>Intégration PiperTTS, audio retourné en Sound Wave.</p>
+                                <span class="phase-status">À venir</span>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-marker">4</div>
+                            <div class="phase-content">
+                                <h4>Actions In-Game</h4>
+                                <p>L'IA peut déclencher des events dans UE5.</p>
+                                <span class="phase-status">À venir</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- V2 -->
+                <section id="v2">
+                    <h3>Évolutions Futures (v2+)</h3>
+                    
+                    <div class="feature-list">
+                        <div class="feature-row feature-row--future">
+                            <span class="feature-icon">🎤</span>
+                            <span><strong>Speech-to-Text</strong> — Le joueur parle au micro, l'IA transcrit et répond</span>
+                        </div>
+                        <div class="feature-row feature-row--future">
+                            <span class="feature-icon">🌍</span>
+                            <span><strong>Langues supplémentaires</strong> — Mandarin, Japonais, Portugais...</span>
+                        </div>
+                        <div class="feature-row feature-row--future">
+                            <span class="feature-icon">👥</span>
+                            <span><strong>Multi-compagnons</strong> — Plusieurs IA qui interagissent entre elles</span>
+                        </div>
+                        <div class="feature-row feature-row--future">
+                            <span class="feature-icon">😊</span>
+                            <span><strong>Émotions avancées</strong> — Impact sur le gameplay et les animations</span>
+                        </div>
+                        <div class="feature-row feature-row--future">
+                            <span class="feature-icon">📚</span>
+                            <span><strong>Apprentissage</strong> — L'IA apprend les préférences du joueur</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <hr>
+                
+                <!-- FINAL CTA -->
+                <section id="start">
+                    <div class="callout callout--tip">
+                        <div class="callout-icon">🚀</div>
+                        <div class="callout-content">
+                            <div class="callout-title">Prêt à commencer ?</div>
+                            <p>Le développement d'Aizoz est en cours. Cette documentation sera mise à jour au fur et à mesure des avancées. Pour toute question ou suggestion, utilise le formulaire de contact.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- FOOTER AD -->
+                <div class="footer-ad">
+                    <span class="ad-label">Publicité</span>
+                    <div class="ad-placeholder">728×90 Leaderboard</div>
+                </div>
+                
+                <!-- FOOTER -->
+                <footer class="footer">
+                    <p class="footer-text">
+                        Créé avec 💜 par <span class="footer-brand">Nizeus</span> — <a href="https://www.instagram.com/nizoz_studio/" target="_blank" rel="noopener">NIZOZ Studio</a> · <a href="https://discord.gg/KHJtUuA92V" target="_blank" rel="noopener">Discord</a> · <a href="index.html#contact">Contact</a>
+                    </p>
+                </footer>
+            </article>
+        </main>
+    </div>
+    
+    <!-- Toast notification -->
+    <div class="toast" id="toast">Copié !</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
